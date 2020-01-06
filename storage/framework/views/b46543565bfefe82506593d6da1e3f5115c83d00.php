@@ -31,7 +31,7 @@
             </table>
         </div>
         <div class="card-footer">
-            <a href="<?php echo e(route('categorias.create')); ?>" class="btn btn-sm btn-primary">Nova categoria</a>
+            <a href="<?php echo e(route('categorias.create')); ?>" class="btn btn-primary">Nova categoria</a>
         </div>
     </div>    
 <?php $__env->stopSection(); ?>

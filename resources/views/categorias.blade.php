@@ -33,7 +33,7 @@
             </table>
         </div>
         <div class="card-footer">
-            <a href="{{ route('categorias.create') }}" class="btn btn-sm btn-primary">Nova categoria</a>
+            <a href="{{ route('categorias.create') }}" class="btn btn-primary">Nova categoria</a>
         </div>
     </div>    
 @endsection
