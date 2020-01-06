@@ -2,37 +2,36 @@
     <div class="card border">
         <div class="card-body">
             <h5 class="card-title">Categorias</h5>
-            
-            <?php if(count($categoria) > 0): ?>
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Código da Categoria</th>
-                            <th>Nome da Categoria</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Código da Categoria</th>
+                        <th>Nome da Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
 
-                    <tbody>
-                        <?php $__currentLoopData = $categoria; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr>
-                                <td><?php echo e($cat->id); ?></td>
-                                <td><?php echo e($cat->name); ?></td>
-                                <td>
-                                    <a href="edit" class="btn btn-sm btn-primary">Editar</a>
-                                    <a href="destroy" class="btn btn-sm btn-danger">Apagar</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    </tbody>
-                </table>
-            <?php endif; ?>
-        
+                <tbody>
+                    <?php $__currentLoopData = $categoria; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td><?php echo e($cat->id); ?></td>
+                            <td><?php echo e($cat->name); ?></td>
+                            <td>
+                                <a href="edit" class="btn btn-sm btn-primary">Editar</a>
+                                <br>
+                                <form action="<?php echo e(route('categorias.destroy', $cat->id)); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
+                                    <input type="submit" value="Apagar" class="btn btn-sm btn-danger">
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </tbody>
+            </table>
         </div>
         <div class="card-footer">
-            <a href="<?php echo e(route('categorias.create')); ?>" class="btn btn-sm btn-primary" role="button">
-                Nova categoria
-            </a>
+            <a href="<?php echo e(route('categorias.create')); ?>" class="btn btn-sm btn-primary">Nova categoria</a>
         </div>
     </div>    
 <?php $__env->stopSection(); ?>
