@@ -17,14 +17,14 @@
             @else
               class="nav-item"
             @endif >
-          <a class="nav-link" href="/produtos">Produtos </a>
+          <a class="nav-link" href="{{ route('produtos.index') }}">Produtos </a>
         </li>
         <li @if ($current == "categorias")
               class="nav-item active"
             @else
               class="nav-item"
             @endif >
-          <a class="nav-link" href="/categorias">Categorias </a>
+          <a class="nav-link" href="{{ route('categorias.index') }}">Categorias </a>
         </li>
       </ul>
     </div>

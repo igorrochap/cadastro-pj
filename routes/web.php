@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('produtos', 'ProdutoController@index');
+/*Route::get('produtos', 'ProdutoController@index');
+Route::get('produtos/novo', 'ProdutoController@create');*/
+Route::resource('produtos', 'ProdutoController');
 
-Route::get('categorias', 'CategoriaController@index');
+Route::resource('categorias', 'CategoriaController');
+/*Route::get('categorias', 'CategoriaController@index');
+Route::get('categorias/novo', 'CategoriaController@create');
+Route::post('categorias', 'CategoriaController@store');*/

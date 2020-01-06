@@ -17,14 +17,14 @@
             <?php else: ?>
               class="nav-item"
             <?php endif; ?> >
-          <a class="nav-link" href="/produtos">Produtos </a>
+          <a class="nav-link" href="<?php echo e(route('produtos.index')); ?>">Produtos </a>
         </li>
         <li <?php if($current == "categorias"): ?>
               class="nav-item active"
             <?php else: ?>
               class="nav-item"
             <?php endif; ?> >
-          <a class="nav-link" href="/categorias">Categorias </a>
+          <a class="nav-link" href="<?php echo e(route('categorias.index')); ?>">Categorias </a>
         </li>
       </ul>
     </div>
