@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="container">
-        <?php $__env->startComponent('components.navbar'); ?>
+        <?php $__env->startComponent('components.navbar', ["current" => $current]); ?>
             
         <?php echo $__env->renderComponent(); ?>
         <main role="main">

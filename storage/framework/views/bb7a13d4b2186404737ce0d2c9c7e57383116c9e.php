@@ -5,13 +5,25 @@
   
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li <?php if($current == "home"): ?>
+              class="nav-item active"
+            <?php else: ?>
+              class="nav-item"
+            <?php endif; ?> >
           <a class="nav-link" href="/">Home </a>
         </li>
-        <li class="nav-item">
+        <li <?php if($current == "produtos"): ?>
+              class="nav-item active"
+            <?php else: ?>
+              class="nav-item"
+            <?php endif; ?> >
           <a class="nav-link" href="/produtos">Produtos </a>
         </li>
-        <li class="nav-item">
+        <li <?php if($current == "categorias"): ?>
+              class="nav-item active"
+            <?php else: ?>
+              class="nav-item"
+            <?php endif; ?> >
           <a class="nav-link" href="/categorias">Categorias </a>
         </li>
       </ul>
