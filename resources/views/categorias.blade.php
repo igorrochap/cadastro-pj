@@ -19,7 +19,7 @@
                             <td>{{ $cat->id }}</td>
                             <td>{{ $cat->name }}</td>
                             <td>
-                                <a href="edit" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="{{ route('categorias.edit', $cat->id) }}" class="btn btn-sm btn-primary">Editar</a>
                                 <br>
                                 <form action="{{ route('categorias.destroy', $cat->id) }}" method="POST">
                                     @csrf

@@ -17,7 +17,7 @@
                             <td><?php echo e($cat->id); ?></td>
                             <td><?php echo e($cat->name); ?></td>
                             <td>
-                                <a href="edit" class="btn btn-sm btn-primary">Editar</a>
+                                <a href="<?php echo e(route('categorias.edit', $cat->id)); ?>" class="btn btn-sm btn-primary">Editar</a>
                                 <br>
                                 <form action="<?php echo e(route('categorias.destroy', $cat->id)); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
