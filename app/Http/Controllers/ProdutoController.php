@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produto;
+use App\Models\Categoria;
 
 class ProdutoController extends Controller
 {
@@ -13,7 +15,9 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return view('produtos');
+        $categorias = Categoria::all();
+        $produtos = Produto::all();
+        return view('produtos', compact('produtos'), compact('categorias'));
     }
 
     /**
@@ -23,7 +27,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::all();
+        return view('novo_produto', compact('categorias'));
     }
 
     /**
@@ -34,7 +39,14 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $produto = new Produto();
+        $produto->nome = request()->input('nome_produto');
+        $produto->stock = request()->input('stock');
+        $produto->price = request()->input('price');
+        $produto->categoria_id = request()->input('select_categoria');
+        $produto->save();
+
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -56,7 +68,13 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categorias = Categoria::all();
+        $produto = Produto::find($id);
+        if(isset($produto)){
+            return view('editar_produto', compact('produto'), compact('categorias'));
+        }
+
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -68,7 +86,17 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produto = Produto::find($id);
+
+        if(isset($produto)){
+            $produto->nome = request()->input('nome_produto');
+            $produto->stock = request()->input('stock');
+            $produto->price = request()->input('price');
+            $produto->categoria_id = request()->input('select_categoria');
+            $produto->save();
+
+            return redirect()->route('produtos.index');
+        }
     }
 
     /**
@@ -79,6 +107,12 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produto = Produto::find($id);
+
+        if(isset($produto)){
+            $produto->delete();
+        }
+
+        return redirect()->route('produtos.index');
     }
 }

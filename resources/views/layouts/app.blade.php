@@ -17,7 +17,6 @@
         .navbar{
             margin-bottom: 10px;
         }
-
     </style>
 </head>
 <body>
