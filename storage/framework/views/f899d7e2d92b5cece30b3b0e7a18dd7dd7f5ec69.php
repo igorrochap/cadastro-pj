@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title>Cadastro de Produtos</title>
-
     <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
+    <script src="https://kit.fontawesome.com/efa587470c.js" crossorigin="anonymous"></script>
 
     <style>
         body{

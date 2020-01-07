@@ -10,7 +10,7 @@
             @else
               class="nav-item"
             @endif >
-          <a class="nav-link" href="/">Home </a>
+          <a class="nav-link" href="/">Home <i class="fas fa-home"></i></a>
         </li>
         <li @if ($current == "produtos")
               class="nav-item active"
