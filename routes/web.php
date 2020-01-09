@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 /*Route::get('produtos', 'ProdutoController@index');
 Route::get('produtos/novo', 'ProdutoController@create');*/
-Route::get('produtos', 'ProdutoController@indexView');
+Route::get('produtos', 'ProdutoController@indexView')->name('produtos.indexView');
 
 Route::resource('categorias', 'CategoriaController');
 /*Route::get('categorias', 'CategoriaController@index');

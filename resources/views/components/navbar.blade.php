@@ -17,7 +17,7 @@
             @else
               class="nav-item"
             @endif >
-          <a class="nav-link" href="{{ route('produtos.index') }}">Produtos </a>
+          <a class="nav-link" href="{{ route('produtos.indexView') }}">Produtos </a>
         </li>
         <li @if ($current == "categorias")
               class="nav-item active"

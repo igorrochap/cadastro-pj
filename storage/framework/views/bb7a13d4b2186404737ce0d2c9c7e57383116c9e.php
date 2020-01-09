@@ -17,7 +17,7 @@
             <?php else: ?>
               class="nav-item"
             <?php endif; ?> >
-          <a class="nav-link" href="<?php echo e(route('produtos.index')); ?>">Produtos </a>
+          <a class="nav-link" href="<?php echo e(route('produtos.indexView')); ?>">Produtos </a>
         </li>
         <li <?php if($current == "categorias"): ?>
               class="nav-item active"

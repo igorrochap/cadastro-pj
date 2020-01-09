@@ -2,7 +2,7 @@
     <div class="card border">
         <div class="card-body">
             <h5 class="card-title">Produtos</h5>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover" id="tabela_produtos">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -96,8 +96,35 @@
             });
         }
 
+        function buildRow(produto){
+            var row = '<tr>' +
+                        '<td>' + produto.id + '</td>' +
+                        '<td>' + produto.nome + '</td>' +
+                        '<td>' + produto.categoria_id + '</td>' +
+                        '<td>' + produto.price + '</td>' +
+                        '<td>' + produto.stock + '</td>' +
+                        '<td>' +
+                            '<button class="btn btn-sm btn-primary"> Editar </button> ' +
+                            '<button class="btn btn-sm btn-danger"> Apagar </button> ' +
+                        '</td>' +
+                      '</tr>';
+
+            return row;
+        }
+
+        function carregarProdutos(){
+            $.getJSON("api/produtos", function(data){
+                for(i = 0; i < data.length; i++){
+                    row = buildRow(data[i]);
+
+                    $('#tabela_produtos>tbody').append(row);
+                }
+            });
+        }
+
         $(function(){
             carregarCategorias();
+            carregarProdutos();
         });
 
     </script>
