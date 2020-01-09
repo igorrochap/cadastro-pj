@@ -106,4 +106,10 @@ class CategoriaController extends Controller
 
         return redirect()->route('categorias.index');
     }
+
+    public function indexJson()
+    {
+        $categoria = Categoria::all();
+        return json_encode($categoria);
+    }
 }
