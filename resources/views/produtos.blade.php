@@ -79,6 +79,13 @@
 
 @section('javascript')
     <script type="text/javascript">
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            }
+        });
+
         function novoProduto(){
             $('#id').val('');
             $('#nome_produto').val('');
