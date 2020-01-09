@@ -59,8 +59,10 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="categorias" class="control-label">Categoria: </label>
                             <select class="form-control" id="categorias">
-
+                                <option selected>Escolha...</option>    
+                            
                             </select>
                         </div>
                     </div>
@@ -85,5 +87,22 @@
 
             $('#dlg_produtos').modal('show');
         }
+
+        function carregarCategorias(){
+            $.getJSON("/api/categorias", function(data){
+                console.log(data);
+
+                for(i = 0; i < data.length; i++){
+                   option = '<option value = "' + data[i].id + '" >' + data[i].name + '</option>';
+
+                   $('#categorias').append(option);
+                }
+            });
+        }
+
+        $(function(){
+            carregarCategorias();
+        });
+
     </script>
 @endsection

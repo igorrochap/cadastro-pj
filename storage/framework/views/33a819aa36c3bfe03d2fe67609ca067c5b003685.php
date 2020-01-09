@@ -57,8 +57,10 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="categorias" class="control-label">Categoria: </label>
                             <select class="form-control" id="categorias">
-
+                                <option selected>Escolha...</option>    
+                            
                             </select>
                         </div>
                     </div>
@@ -83,6 +85,23 @@
 
             $('#dlg_produtos').modal('show');
         }
+
+        function carregarCategorias(){
+            $.getJSON("/api/categorias", function(data){
+                console.log(data);
+
+                for(i = 0; i < data.length; i++){
+                   option = '<option value = "' + data[i].id + '" >' + data[i].name + '</option>';
+
+                   $('#categorias').append(option);
+                }
+            });
+        }
+
+        $(function(){
+            carregarCategorias();
+        });
+
     </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', ["current"=>"produtos"], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/estagiariodev/Documentos/Igor/projetos/cadastro-pj/resources/views/produtos.blade.php ENDPATH**/ ?>
