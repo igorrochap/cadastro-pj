@@ -8,12 +8,18 @@ use App\Models\Categoria;
 
 class ProdutoController extends Controller
 {
+    
+    public function index(){
+        $produtos = Produto::all();
+        return json_encode($produtos);
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexView()
     {
         $categorias = Categoria::all();
         $produtos = Produto::all();

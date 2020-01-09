@@ -88,8 +88,6 @@
 
         function carregarCategorias(){
             $.getJSON("/api/categorias", function(data){
-                console.log(data);
-
                 for(i = 0; i < data.length; i++){
                    option = '<option value = "' + data[i].id + '" >' + data[i].name + '</option>';
 
