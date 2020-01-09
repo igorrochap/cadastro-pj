@@ -16,34 +16,74 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($produtos as $prod)
-                    <tr>
-                        <td> {{ $prod->id }} </td>
-                        <td> {{ $prod->nome }} </td>
-                        <td> 
-                            @foreach ($categorias as $cat)
-                                @if ($prod->categoria_id == $cat->id)
-                                    {{ $cat->name }}
-                                @endif
-                            @endforeach
-                        </td>
-                        <td> R$ {{ $prod->price }} </td>
-                        <td> {{ $prod->stock }} </td>
-                        <td>
-                            <a href="{{ route('produtos.edit', $prod->id) }}" class="btn btn-sm btn-primary">Editar</a>
-                            <form action="{{ route('produtos.destroy', $prod->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit" value="Apagar" class="btn btn-sm btn-danger">
-                            </form>    
-                        </td>
-                    </tr>
-                    @endforeach
+                    
                 </tbody>
             </table>
         </div>
         <div class="card-footer">
-            <a href="{{ route('produtos.create') }}" class="btn btn-primary">Novo produto</a>
+            <button class="btn btn-primary" role="button" onClick="novoProduto()"> Novo produto </button>
         </div>
     </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="dlg_produtos">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="form-horizontal" id="form_produto">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Novo Produto</h5>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="id">
+                        <div class="form-group">
+                            <label for="nome_produto" class="control-label">Nome do produto: </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="nome_produto"
+                                       id="nome_produto" placeholder="Produto">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price" class="control-label">Preço: R$</label>
+                            <div class="input-group">
+                                <input type="number" name="price" id="price" min="0" 
+                                       class="form-control" placeholder="0.00">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock" class="control-label">Quantidade: </label>
+                            <div class="input-group">
+                                <input type="number" name="stock" id="stock" min="0" 
+                                       class="form-control" placeholder="0">    
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" id="categorias">
+
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('javascript')
+    <script type="text/javascript">
+        function novoProduto(){
+            $('#id').val('');
+            $('#nome_produto').val('');
+            $('#price').val('');
+            $('#stock').val('');
+
+            $('#dlg_produtos').modal('show');
+        }
+    </script>
 @endsection

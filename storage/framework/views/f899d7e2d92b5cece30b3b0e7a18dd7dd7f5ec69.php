@@ -33,5 +33,10 @@
 
 
     <script src="<?php echo e(asset('js/app.js')); ?>" type="text/javascript"></script>
+    
+    <?php if (! empty(trim($__env->yieldContent('javascript')))): ?>
+        <?php echo $__env->yieldContent('javascript'); ?>
+    <?php endif; ?>
+
 </body>
 </html><?php /**PATH /home/estagiariodev/Documentos/Igor/projetos/cadastro-pj/resources/views/layouts/app.blade.php ENDPATH**/ ?>

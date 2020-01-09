@@ -14,36 +14,75 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $__currentLoopData = $produtos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prod): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                        <td> <?php echo e($prod->id); ?> </td>
-                        <td> <?php echo e($prod->nome); ?> </td>
-                        <td> 
-                            <?php $__currentLoopData = $categorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($prod->categoria_id == $cat->id): ?>
-                                    <?php echo e($cat->name); ?>
-
-                                <?php endif; ?>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </td>
-                        <td> R$ <?php echo e($prod->price); ?> </td>
-                        <td> <?php echo e($prod->stock); ?> </td>
-                        <td>
-                            <a href="<?php echo e(route('produtos.edit', $prod->id)); ?>" class="btn btn-sm btn-primary">Editar</a>
-                            <form action="<?php echo e(route('produtos.destroy', $prod->id)); ?>" method="POST">
-                                <?php echo csrf_field(); ?>
-                                <?php echo method_field('DELETE'); ?>
-                                <input type="submit" value="Apagar" class="btn btn-sm btn-danger">
-                            </form>    
-                        </td>
-                    </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    
                 </tbody>
             </table>
         </div>
         <div class="card-footer">
-            <a href="<?php echo e(route('produtos.create')); ?>" class="btn btn-primary">Novo produto</a>
+            <button class="btn btn-primary" role="button" onClick="novoProduto()"> Novo produto </button>
         </div>
     </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="dlg_produtos">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="form-horizontal" id="form_produto">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Novo Produto</h5>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="id">
+                        <div class="form-group">
+                            <label for="nome_produto" class="control-label">Nome do produto: </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="nome_produto"
+                                       id="nome_produto" placeholder="Produto">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price" class="control-label">Preço: R$</label>
+                            <div class="input-group">
+                                <input type="number" name="price" id="price" min="0" 
+                                       class="form-control" placeholder="0.00">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="stock" class="control-label">Quantidade: </label>
+                            <div class="input-group">
+                                <input type="number" name="stock" id="stock" min="0" 
+                                       class="form-control" placeholder="0">    
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" id="categorias">
+
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="cancel" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('javascript'); ?>
+    <script type="text/javascript">
+        function novoProduto(){
+            $('#id').val('');
+            $('#nome_produto').val('');
+            $('#price').val('');
+            $('#stock').val('');
+
+            $('#dlg_produtos').modal('show');
+        }
+    </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', ["current"=>"produtos"], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/estagiariodev/Documentos/Igor/projetos/cadastro-pj/resources/views/produtos.blade.php ENDPATH**/ ?>
