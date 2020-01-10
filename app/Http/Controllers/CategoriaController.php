@@ -7,12 +7,18 @@ use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
+
+    public function index(){
+        $categorias = Categoria::all();
+        return json_encode($categorias);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexView()
     {
         $categoria = Categoria::all();
         return view('categorias', compact('categoria'));
@@ -40,7 +46,7 @@ class CategoriaController extends Controller
         $categoria->name = request()->input("nome_categoria");
         $categoria->save();
 
-        return redirect()->route('categorias.index');
+        return json_encode($categoria);
     }
 
     /**
@@ -102,9 +108,10 @@ class CategoriaController extends Controller
 
         if(isset($categoria)){
             $categoria->delete();
+            return response('OK', 200);
         }
 
-        return redirect()->route('categorias.index');
+        return response('CATEGORIA NÃO ENCONTRADA', 404);
     }
 
     public function indexJson()

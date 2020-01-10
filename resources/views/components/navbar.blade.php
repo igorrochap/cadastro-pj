@@ -24,7 +24,7 @@
             @else
               class="nav-item"
             @endif >
-          <a class="nav-link" href="{{ route('categorias.index') }}">Categorias </a>
+          <a class="nav-link" href="{{ route('categorias.indexView') }}">Categorias </a>
         </li>
       </ul>
     </div>

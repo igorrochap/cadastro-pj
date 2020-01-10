@@ -19,7 +19,7 @@
                         <p class="card-text">
                             Cadaste as categorias dos seus produtos.
                         </p>
-                        <a href="<?php echo e(route('categorias.index')); ?>" class="btn btn-primary">Cadastre suas Categorias</a>
+                        <a href="<?php echo e(route('categorias.indexView')); ?>" class="btn btn-primary">Cadastre suas Categorias</a>
                     </div>
                 </div>
             </div>

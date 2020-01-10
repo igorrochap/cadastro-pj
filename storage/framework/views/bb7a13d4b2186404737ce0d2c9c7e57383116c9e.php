@@ -24,7 +24,7 @@
             <?php else: ?>
               class="nav-item"
             <?php endif; ?> >
-          <a class="nav-link" href="<?php echo e(route('categorias.index')); ?>">Categorias </a>
+          <a class="nav-link" href="<?php echo e(route('categorias.indexView')); ?>">Categorias </a>
         </li>
       </ul>
     </div>

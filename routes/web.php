@@ -23,7 +23,4 @@ Route::get('/', function () {
 Route::get('produtos/novo', 'ProdutoController@create');*/
 Route::get('produtos', 'ProdutoController@indexView')->name('produtos.indexView');
 
-Route::resource('categorias', 'CategoriaController');
-/*Route::get('categorias', 'CategoriaController@index');
-Route::get('categorias/novo', 'CategoriaController@create');
-Route::post('categorias', 'CategoriaController@store');*/
+Route::get('categorias', 'CategoriaController@indexView')->name('categorias.indexView');
