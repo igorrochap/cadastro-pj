@@ -60,7 +60,7 @@
 
                         <div class="form-group">
                             <label for="categorias" class="control-label">Categoria: </label>
-                            <select class="form-control" id="categorias">
+                            <select class="form-control" name="categorias" id="categorias" >
                                 <option selected>Escolha...</option>    
                             
                             </select>
@@ -130,6 +130,25 @@
                 }
             });
         }
+
+        function salvarProduto(){
+            produto = {
+                nome_produto: $('#nome_produto').val(),
+                stock: $('#stock').val(),
+                price: $('#price').val(),
+                categorias: $('#categorias').val()
+            }
+
+            $.post('/api/produtos', produto, function(data){
+
+            });
+        }
+
+        $('#form_produto').submit( function(event){
+            event.preventDefault();
+            salvarProduto();
+            $('#dlg_produtos').modal('hide');
+        });
 
         $(function(){
             carregarCategorias();

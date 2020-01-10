@@ -9,7 +9,7 @@
                             Aqui você cadastra seus produtos.
                             Não esqueça de cadastrar previamente suas categorias.
                         </p>
-                        <a href="<?php echo e(route('produtos.index')); ?>" class="btn btn-primary">Cadastre seus produtos</a>
+                        <a href="<?php echo e(route('produtos.indexView')); ?>" class="btn btn-primary">Cadastre seus produtos</a>
                     </div>
                 </div>
 

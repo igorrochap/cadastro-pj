@@ -49,10 +49,10 @@ class ProdutoController extends Controller
         $produto->nome = request()->input('nome_produto');
         $produto->stock = request()->input('stock');
         $produto->price = request()->input('price');
-        $produto->categoria_id = request()->input('select_categoria');
+        $produto->categoria_id = request()->input('categorias');
         $produto->save();
 
-        return redirect()->route('produtos.index');
+        return json_encode($produto);
     }
 
     /**

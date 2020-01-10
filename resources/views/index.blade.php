@@ -11,7 +11,7 @@
                             Aqui você cadastra seus produtos.
                             Não esqueça de cadastrar previamente suas categorias.
                         </p>
-                        <a href="{{ route('produtos.index') }}" class="btn btn-primary">Cadastre seus produtos</a>
+                        <a href="{{ route('produtos.indexView') }}" class="btn btn-primary">Cadastre seus produtos</a>
                     </div>
                 </div>
 
