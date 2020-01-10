@@ -117,8 +117,9 @@ class ProdutoController extends Controller
 
         if(isset($produto)){
             $produto->delete();
+            return response('OK', 200);
         }
 
-        return redirect()->route('produtos.index');
+        return response('PRODUTO NÃO ENCONTRADO', 404);
     }
 }

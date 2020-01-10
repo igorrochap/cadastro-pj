@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label for="price" class="control-label">Preço: R$</label>
                             <div class="input-group">
-                                <input type="number" name="price" id="price" min="0" 
+                                <input type="number" name="price" id="price" min="0" step="any" 
                                        class="form-control" placeholder="0.00">
                             </div>
                         </div>
@@ -113,8 +113,8 @@
                         '<td>' + produto.price + '</td>' +
                         '<td>' + produto.stock + '</td>' +
                         '<td>' +
-                            '<button class="btn btn-sm btn-primary"> Editar </button> ' +
-                            '<button class="btn btn-sm btn-danger"> Apagar </button> ' +
+                            '<button class="btn btn-sm btn-primary" onclick="editarProduto(' + produto.id +')"> Editar </button> ' +
+                            '<button class="btn btn-sm btn-danger" onclick="removerProduto(' + produto.id +')"> Apagar </button> ' +
                         '</td>' +
                       '</tr>';
 
@@ -144,6 +144,28 @@
                 row = buildRow(produto);
 
                 $('#tabela_produtos>tbody').append(row);
+            });
+        }
+
+        function removerProduto(id){
+            $.ajax({
+                type: "DELETE",
+                url: "/api/produtos/" + id,
+                context: this,
+                success: function(){
+                    console.log('OK');
+                    rows = $('#tabela_produtos>tbody>tr')
+                    erase = rows.filter(function(i, element){
+                        return element.cells[0].textContent == id;
+                    });
+
+                    if(erase){
+                        erase.remove();
+                    }
+                },
+                error: function(error){
+                    console.log(error);
+                }
             });
         }
 
