@@ -138,7 +138,10 @@
             }
 
             $.post('/api/produtos', produto, function(data){
+                produto = JSON.parse(data);
+                row = buildRow(produto);
 
+                $('#tabela_produtos>tbody').append(row);
             });
         }
 
