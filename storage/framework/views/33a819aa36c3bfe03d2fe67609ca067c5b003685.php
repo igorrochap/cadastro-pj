@@ -167,9 +167,61 @@
             });
         }
 
+        function editarProduto(id){
+            $.getJSON('/api/produtos/' + id, function(data){
+                console.log(data);
+                $('#id').val(data.id);
+                $('#nome_produto').val(data.nome);
+                $('#price').val(data.price);
+                $('#stock').val(data.stock);
+                $('#categorias').val(data.categoria_id);
+
+                $('#dlg_produtos').modal('show');
+            });
+        }
+
+        function atualizarProduto(){
+            produto = {
+                id: $('#id').val(),
+                nome_produto: $('#nome_produto').val(),
+                stock: $('#stock').val(),
+                price: $('#price').val(),
+                categorias: $('#categorias').val()
+            }
+
+            $.ajax({
+                type: "PUT",
+                url: "/api/produtos/" + produto.id,
+                context: this,
+                data: produto,
+                success: function(data){
+                    produto = JSON.parse(data); 
+                    console.log('OK'); 
+                    rows = $('#tabela_produtos>tbody>tr')
+                    update = rows.filter(function(i, element){
+                        return element.cells[0].textContent == produto.id;
+                    });
+
+                    if(update){
+                        update[0].cells[0].textContent = produto.id;
+                        update[0].cells[1].textContent = produto.nome;
+                        update[0].cells[2].textContent = produto.categoria_id;
+                        update[0].cells[3].textContent = produto.price;
+                        update[0].cells[4].textContent = produto.stock;
+                    }
+                },
+                error: function(error){ console.log(error); }
+            });
+        }
+
         $('#form_produto').submit( function(event){
             event.preventDefault();
-            salvarProduto();
+            
+            if($('#id').val() != '')
+                atualizarProduto();
+            else
+                salvarProduto();
+
             $('#dlg_produtos').modal('hide');
         });
 

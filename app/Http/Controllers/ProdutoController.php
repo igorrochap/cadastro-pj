@@ -62,8 +62,14 @@ class ProdutoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $produto = Produto::find($id);
+        
+        if(isset($produto)){
+            return json_encode($produto);
+        }
+
+        return response('Produto não encontrado', 404);
     }
 
     /**
@@ -98,11 +104,13 @@ class ProdutoController extends Controller
             $produto->nome = request()->input('nome_produto');
             $produto->stock = request()->input('stock');
             $produto->price = request()->input('price');
-            $produto->categoria_id = request()->input('select_categoria');
+            $produto->categoria_id = request()->input('categorias');
             $produto->save();
 
-            return redirect()->route('produtos.index');
+            return json_encode($produto);
         }
+
+        return response('Produto não encontrado', 404);
     }
 
     /**
