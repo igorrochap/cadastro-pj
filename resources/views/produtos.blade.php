@@ -171,7 +171,6 @@
 
         function editarProduto(id){
             $.getJSON('/api/produtos/' + id, function(data){
-                console.log(data);
                 $('#id').val(data.id);
                 $('#nome_produto').val(data.nome);
                 $('#price').val(data.price);
@@ -199,7 +198,7 @@
                 success: function(data){
                     produto = JSON.parse(data); 
                     console.log('OK'); 
-                    rows = $('#tabela_produtos>tbody>tr')
+                    rows = $('#tabela_produtos>tbody>tr');
                     update = rows.filter(function(i, element){
                         return element.cells[0].textContent == produto.id;
                     });

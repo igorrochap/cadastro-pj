@@ -57,7 +57,10 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        if(isset($categoria))
+            return json_encode($categoria);
     }
 
     /**
@@ -92,8 +95,10 @@ class CategoriaController extends Controller
             $categoria->name = request()->input('nome_categoria');
             $categoria->save();
 
-            return redirect()->route('categorias.index');
+            return json_encode($categoria);
         }
+
+        return response('CATEGORIA NÃO ENCONTRADA', 404);
     }
 
     /**

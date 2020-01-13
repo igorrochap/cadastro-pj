@@ -60,7 +60,7 @@
                     '<td>' + categoria.id + '</td>' +
                     '<td>' + categoria.name + '</td>' +
                     '<td>' +
-                        '<button class="btn btn-sm btn-primary" onclick="" > Editar </button> ' +
+                        '<button class="btn btn-sm btn-primary" onclick="editarCategoria(' + categoria.id + ')" > Editar </button> ' +
                         '<button class="btn btn-sm btn-danger" onclick="apagarCategoria(' + categoria.id + ')" > Apagar </button>' +
                     '</td>' +
                   '</tr>';
@@ -98,12 +98,6 @@
             })
         }
 
-        $('#form_categorias').submit( function(event){
-            event.preventDefault();
-            salvarCategoria();
-            $('#dlg_categorias').modal('hide');
-        });
-
         function apagarCategoria(id){
             $.ajax({
                 type: "DELETE",
@@ -123,13 +117,59 @@
                 error: function(error){
                     console.log(error);
                 } 
-            })
+            });
         }
 
+        function editarCategoria(id){
+            $.getJSON('/api/categorias/' + id, function(data){
+                $('#id').val(data.id);
+                $('#nome_categoria').val(data.name);
+
+                $('#dlg_categorias').modal('show');
+            });
+        }
+
+        function atualizaCategoria(){
+            categoria = {
+                id: $('#id').val(),
+                nome_categoria: $('#nome_categoria').val()
+            }
+
+            $.ajax({
+                type: "PUT",
+                url: "/api/categorias/" + categoria.id,
+                context: this,
+                data: categoria,
+                success: function(data){
+                    categoria = JSON.parse(data);
+                    console.log('OK');
+                    rows = $('#tabela_categorias>tbody>tr');
+                    update = rows.filter(function(i, element){
+                        return element.cells[0].textContent == categoria.id;
+                    });
+
+                    if(update){
+                        update[0].cells[0].textContent = categoria.id;
+                        update[0].cells[1].textContent = categoria.name;
+                    }
+                },
+
+                error: function(error){ console.log(error); }
+            });
+        }
+
+        $('#form_categorias').submit( function(event){
+            event.preventDefault();
+            if($('#id').val() != '')
+                atualizaCategoria();
+            else
+                salvarCategoria();
+            $('#dlg_categorias').modal('hide');
+        });
 
         $(function(){
             carregaCategorias();
-        })
+        });
 
     </script>
 <?php $__env->stopSection(); ?>
