@@ -10,7 +10,7 @@ class ProdutoController extends Controller
 {
     
     public function index(){
-        $produtos = Produto::all();
+        $produtos = Produto::with('categoria')->get();
         return json_encode($produtos);
     }
     
@@ -21,9 +21,8 @@ class ProdutoController extends Controller
      */
     public function indexView()
     {
-        $categorias = Categoria::all();
         $produtos = Produto::all();
-        return view('produtos', compact('produtos'), compact('categorias'));
+        return view('produtos', compact('produtos'));
     }
 
     /**
@@ -33,8 +32,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();
-        return view('novo_produto', compact('categorias'));
+        //
     }
 
     /**
@@ -45,11 +43,13 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
+        $categoria = Categoria::find(request()->input('categorias'));
+
         $produto = new Produto();
         $produto->nome = request()->input('nome_produto');
         $produto->stock = request()->input('stock');
         $produto->price = request()->input('price');
-        $produto->categoria_id = request()->input('categorias');
+        $produto->categoria()->associate($categoria);
         $produto->save();
 
         return json_encode($produto);
@@ -98,13 +98,14 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $categoria = Categoria::find(request()->input('categorias'));
         $produto = Produto::find($id);
 
         if(isset($produto)){
             $produto->nome = request()->input('nome_produto');
             $produto->stock = request()->input('stock');
             $produto->price = request()->input('price');
-            $produto->categoria_id = request()->input('categorias');
+            $produto->categoria()->associate($categoria);
             $produto->save();
 
             return json_encode($produto);

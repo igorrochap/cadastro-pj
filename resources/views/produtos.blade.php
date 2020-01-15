@@ -65,6 +65,7 @@
                             
                             </select>
                         </div>
+                        <input type="hidden" id="nome_categoria">
                     </div>
                     
                     <div class="modal-footer">
@@ -91,7 +92,8 @@
             $('#nome_produto').val('');
             $('#price').val('');
             $('#stock').val('');
-
+            $('#nome_categoria').val('');
+            
             $('#dlg_produtos').modal('show');
         }
 
@@ -109,7 +111,7 @@
             var row = '<tr>' +
                         '<td>' + produto.id + '</td>' +
                         '<td>' + produto.nome + '</td>' +
-                        '<td>' + produto.categoria_id + '</td>' +
+                        '<td>' + produto.categoria.name + '</td>' +
                         '<td>' + produto.price + '</td>' +
                         '<td>' + produto.stock + '</td>' +
                         '<td>' +
@@ -136,15 +138,19 @@
                 nome_produto: $('#nome_produto').val(),
                 stock: $('#stock').val(),
                 price: $('#price').val(),
-                categorias: $('#categorias').val()
+                categorias: $('#categorias').val(),
             }
 
             $.post('/api/produtos', produto, function(data){
-                produto = JSON.parse(data);
+                console.log(data);
+                produto = JSON.parse(data); 
+                
                 row = buildRow(produto);
 
                 $('#tabela_produtos>tbody').append(row);
             });
+            
+            
         }
 
         function removerProduto(id){
@@ -206,7 +212,7 @@
                     if(update){
                         update[0].cells[0].textContent = produto.id;
                         update[0].cells[1].textContent = produto.nome;
-                        update[0].cells[2].textContent = produto.categoria_id;
+                        update[0].cells[2].textContent = produto.categoria.name;
                         update[0].cells[3].textContent = produto.price;
                         update[0].cells[4].textContent = produto.stock;
                     }
